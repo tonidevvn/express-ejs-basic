@@ -1,18 +1,24 @@
-import connection from "../configs/connectDB";
-let getHomePage = (req, res) => {
-  let data = [];
-  // logic
-  // execute will internally call prepare and query
-  connection.query("SELECT * FROM `users`", function (err, results, fields) {
-    console.log(">>> checking mysql2");
-    console.log(results); // results contains rows returned by server
-    data = results.map((row) => {
-      return row;
-    });
-    return res.render("index.ejs", { dataUser: data });
-  });
+import connectionPool from "../configs/connectDB";
+
+let getHomePage = async (req, res) => {
+  const [users] = await connectionPool.promise().execute("SELECT * FROM users");
+  console.log(">>> checking mysql2");
+  console.log(users);
+  return res.render("index.ejs", { dataUser: users });
+};
+
+let getUserDetails = async (req, res) => {
+  let uid = req.params.userId;
+  console.log("uid request", uid);
+  const [user] = await connectionPool
+    .promise()
+    .execute(`SELECT * FROM users WHERE id=?`, [uid]);
+  console.log(">>> checking mysql2");
+  console.log(user);
+  return res.render("index.ejs", { dataUser: user });
 };
 
 module.exports = {
   getHomePage,
+  getUserDetails,
 };
