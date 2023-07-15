@@ -13,15 +13,8 @@ const initWebRoute = (app) => {
   // define the home page route
   router.get("/", homeController.getHomePage);
 
-  // define the about route
-  router.get("/about", (req, res) => {
-    res.send("I am Tony");
-  });
-
-  // define the hello route
-  router.get("/hello", (req, res) => {
-    res.send("Hello 5 Milion AE EJS UP DOWN!");
-  });
+  // define the user details route
+  router.get("/detail/user/:userId", homeController.getUserDetails);
 
   app.use("/", router);
 };
