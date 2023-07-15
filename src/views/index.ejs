@@ -15,9 +15,8 @@
       <a href="#about">About</a>
     </div>
     <div class="container">
-      <h1>HELLO 500 AE HERE (EJS)!</h1>
       <div class="w3-container">
-        <h2>Users Table</h2>
+        <h2>List Users Table</h2>
 
         <table class="w3-table-all w3-hoverable">
           <thead>
@@ -37,12 +36,14 @@
               <td>
                 <div class="w3-bar">
                   <button class="w3-button w3-black">
-                    <a href="/detail/user/<%= user.id %>" target="_blank"
+                    <a href="/user/details/<%= user.id %>" target="_blank"
                       >Details</a
                     >
                   </button>
                   <button class="w3-button w3-teal">Edit</button>
-                  <button class="w3-button w3-red">Delete</button>
+                  <button class="w3-button w3-red">
+                    <a href="/user/delete/<%= user.id %>">Delete</a>
+                  </button>
                 </div>
               </td>
             </tr>
@@ -50,6 +51,31 @@
           </tbody>
         </table>
       </div>
+    </div>
+
+    <div class="w3-container">
+      <h2 class="w3-center">Create a new user</h2>
+      <form class="w3-container" action="/user/create" method="post">
+        <p>
+          <label for="firstName">First Name</label>
+          <input class="w3-input" type="text" id="firstName" name="firstName" />
+        </p>
+        <p>
+          <label for="lastName">Last Name</label>
+          <input class="w3-input" type="text" id="lastName" name="lastName" />
+        </p>
+        <p>
+          <label for="email">Email</label>
+          <input class="w3-input" type="email" id="email" name="email" />
+        </p>
+        <p>
+          <label for="address">Address</label>
+          <input class="w3-input" type="text" id="address" name="address" />
+        </p>
+        <div class="w3-bar">
+          <input type="submit" value="Submit" class="w3-button w3-black" />
+        </div>
+      </form>
     </div>
   </body>
 </html>

@@ -1,15 +1,14 @@
 import express from "express";
-import bodyParser from "body-parser";
 import "dotenv/config";
 import configViewEngine from "./configs/viewEngine";
 import initWebRoute from "./route/web";
-import connection from "./configs/connectDB";
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 // support parsing of application/json type post data
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // config view engine
 configViewEngine(app);
