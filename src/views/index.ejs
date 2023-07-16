@@ -4,16 +4,10 @@
     <meta charset="UTF-8" />
     <title>NodeJs - Express Basic</title>
     <link rel="icon" type="image/x-icon" href="/image/favicon.ico" />
-
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <div class="topnav">
-      <a class="active" href="#home">Home</a>
-      <a href="#news">News</a>
-      <a href="#contact">Contact</a>
-      <a href="#about">About</a>
-    </div>
+    <%- include('topnav') -%>
     <div class="container">
       <div class="w3-container">
         <h2>List Users Table</h2>
@@ -35,15 +29,27 @@
               <td><%= user.lastName %></td>
               <td>
                 <div class="w3-bar">
-                  <button class="w3-button w3-black">
-                    <a href="/user/details/<%= user.id %>" target="_blank"
-                      >Details</a
-                    >
-                  </button>
-                  <button class="w3-button w3-teal">Edit</button>
-                  <button class="w3-button w3-red">
-                    <a href="/user/delete/<%= user.id %>">Delete</a>
-                  </button>
+                  <form action="/user/details/<%= user.id %>" method="get">
+                    <button class="w3-button w3-black" type="submit">
+                      Details
+                    </button>
+                  </form>
+                  <form action="/user/edit/<%= user.id %>" method="post">
+                    <button class="w3-button w3-teal" type="submit">
+                      Edit
+                    </button>
+                  </form>
+                  <form action="/user/delete" method="post">
+                    <input
+                      type="text"
+                      name="userId"
+                      hidden
+                      value="<%= user.id %>"
+                    />
+                    <button class="w3-button w3-red" type="submit">
+                      Delete
+                    </button>
+                  </form>
                 </div>
               </td>
             </tr>

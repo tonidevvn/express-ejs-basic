@@ -20,7 +20,13 @@ const initWebRoute = (app) => {
   router.post("/user/create", homeController.createNewUser);
 
   // define the user delete route
-  router.get("/user/delete/:userId", homeController.deleteUser);
+  router.post("/user/delete", homeController.deleteUser);
+
+  // define the user edit route
+  router.post("/user/edit/:userId", homeController.editUserDetails);
+
+  // define the user update route
+  router.post("/user/update", homeController.updateUser);
 
   app.use("/", router);
 };

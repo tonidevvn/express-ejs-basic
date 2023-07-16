@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NodeJs - Express Basic</title>
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include('topnav') -%>
+    <div class="w3-container">
+      <h2 class="w3-center">Update User information</h2>
+      <form class="w3-container" action="/user/update" method="post">
+        <input
+          hidden
+          type="text"
+          id="userId"
+          name="userId"
+          value="<%= dataUser.id %>"
+        />
+        <p>
+          <label for="firstName">First Name</label>
+          <input
+            class="w3-input"
+            type="text"
+            id="firstName"
+            name="firstName"
+            value="<%= dataUser.firstName %>"
+          />
+        </p>
+        <p>
+          <label for="lastName">Last Name</label>
+          <input
+            class="w3-input"
+            type="text"
+            id="lastName"
+            name="lastName"
+            value="<%= dataUser.lastName %>"
+          />
+        </p>
+        <p>
+          <label for="email">Email</label>
+          <input
+            class="w3-input"
+            type="email"
+            id="email"
+            name="email"
+            value="<%= dataUser.email %>"
+          />
+        </p>
+        <p>
+          <label for="dataUser">Address</label>
+          <input
+            class="w3-input"
+            type="text"
+            id="address"
+            name="address"
+            value="<%= dataUser.address %>"
+          />
+        </p>
+        <div class="w3-bar">
+          <input type="submit" value="Save" class="w3-button w3-black" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

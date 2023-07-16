@@ -10,12 +10,12 @@ let getHomePage = async (req, res) => {
 let getUserDetails = async (req, res) => {
   let uid = req.params.userId;
   console.log("uid request", uid);
-  const [user] = await connectionPool
+  let [user] = await connectionPool
     .promise()
     .execute(`SELECT * FROM users WHERE id=?`, [uid]);
   console.log(">>> checking mysql2");
-  console.log(user);
-  return res.send(JSON.stringify(user));
+  console.log(user[0]);
+  return res.render("view.ejs", { dataUser: user[0] });
 };
 
 let createNewUser = async (req, res) => {
@@ -31,9 +31,31 @@ let createNewUser = async (req, res) => {
 };
 
 let deleteUser = async (req, res) => {
+  let { userId } = req.body;
+  console.log("uid request", userId);
+  await connectionPool
+    .promise()
+    .execute(`DELETE FROM users WHERE id=?`, [userId]);
+  return res.redirect("/");
+};
+
+let editUserDetails = async (req, res) => {
   let uid = req.params.userId;
   console.log("uid request", uid);
-  await connectionPool.promise().execute(`DELETE FROM users WHERE id=?`, [uid]);
+  let [user] = await connectionPool
+    .promise()
+    .execute(`SELECT * FROM users WHERE id=?`, [uid]);
+  return res.render("update.ejs", { dataUser: user[0] });
+};
+
+let updateUser = async (req, res) => {
+  let { userId, firstName, lastName, email, address } = req.body;
+  await connectionPool
+    .promise()
+    .execute(
+      `UPDATE users SET firstName=?, lastName=?, email=?, address=? WHERE id=?`,
+      [firstName, lastName, email, address, userId]
+    );
   return res.redirect("/");
 };
 
@@ -42,4 +64,6 @@ module.exports = {
   getUserDetails,
   createNewUser,
   deleteUser,
+  editUserDetails,
+  updateUser,
 };
