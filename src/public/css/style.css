@@ -62,3 +62,8 @@ h1 {
 .w3-teal{color:#fff!important;background-color:#009688!important}
 .w3-red{color:#fff!important;background-color:#f44336!important}
 .w3-input{padding:8px;display:block;border:none;border-bottom:1px solid #ccc;width:100%}
+
+/* Upload page */
+.btn-upload {
+  margin-top: 20px;
+}

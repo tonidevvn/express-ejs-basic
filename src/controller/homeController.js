@@ -59,6 +59,50 @@ let updateUser = async (req, res) => {
   return res.redirect("/");
 };
 
+let getUploadPage = async (req, res) => {
+  return res.render("upload.ejs");
+};
+
+let handleFileUpload = (req, res) => {
+  // req.file contains information of uploaded file
+  // req.body contains information of text fields, if there were any
+  console.log("file name upload", req.file, req.body);
+
+  if (req.fileValidationError) {
+    return res.send(req.fileValidationError);
+  } else if (!req.file) {
+    return res.send("Please select an image to upload");
+  }
+
+  // Display uploaded image for user validation
+  res.send(
+    `You have uploaded this image: <hr/><img src="/static/${req.file.filename}" width="500"><hr /><a href="./upload">Upload another image</a>`
+  );
+};
+
+let handleMultiFilesUpload = (req, res) => {
+  // req.files contains information of uploaded file
+  // req.body contains information of text fields, if there were any
+  const files = req.files;
+  console.log("files upload ", files, files.length);
+
+  if (req.fileValidationError) {
+    return res.send(req.fileValidationError);
+  } else if (!req.files || !req.files.length) {
+    return res.send("Please select at least one image to upload");
+  }
+
+  let index, len;
+  let result = `You have uploaded these images (${files.length}): <hr />`;
+
+  // Loop through all the uploaded images and display them on frontend
+  for (index = 0, len = files.length; index < len; ++index) {
+    result += `<img src="/static/${files[index].filename}" width="300" style="margin-right: 20px;">`;
+  }
+  result += '<hr/><a href="./upload">Upload more images</a>';
+  res.send(result);
+};
+
 module.exports = {
   getHomePage,
   getUserDetails,
@@ -66,4 +110,7 @@ module.exports = {
   deleteUser,
   editUserDetails,
   updateUser,
+  getUploadPage,
+  handleFileUpload,
+  handleMultiFilesUpload,
 };

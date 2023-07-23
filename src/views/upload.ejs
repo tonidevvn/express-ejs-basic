@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>NodeJs - Express Basic</title>
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include('topnav') -%>
+    <div class="container">
+      <div class="w3-container">
+        <h2>Upload file</h2>
+
+        <div class="w3-container">
+          <form
+            method="POST"
+            action="/upload-profile-pic"
+            enctype="multipart/form-data"
+          >
+            <div>
+              <label>Select your profile picture: </label>
+              <input
+                type="file"
+                name="profile_pic"
+                accept="image/png, image/jpeg"
+              />
+            </div>
+            <div>
+              <input
+                type="submit"
+                name="btn_upload_profile_pic"
+                value="Upload"
+                class="w3-button w3-red btn-upload"
+                value="Save"
+              />
+            </div>
+          </form>
+        </div>
+        <br />
+        <div class="w3-container">
+          <form
+            method="POST"
+            action="/upload-multiple-images"
+            enctype="multipart/form-data"
+          >
+            <div>
+              <label>Select multiple images:</label>
+              <input
+                type="file"
+                name="multiple_images"
+                accept="image/png, image/jpeg"
+                multiple
+              />
+            </div>
+            <div>
+              <input
+                type="submit"
+                name="btn_upload_multiple_images"
+                value="Upload"
+                class="w3-button w3-red btn-upload"
+                value="Save"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

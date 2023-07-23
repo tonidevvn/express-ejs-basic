@@ -1,5 +1,6 @@
 import express from "express";
 import homeController from "../controller/homeController";
+import fileUpload from "../configs/fileUpload";
 
 let router = express.Router();
 
@@ -27,6 +28,24 @@ const initWebRoute = (app) => {
 
   // define the user update route
   router.post("/user/update", homeController.updateUser);
+
+  // define the upload file route
+  router.get("/upload", homeController.getUploadPage);
+
+  // define the upload single file route
+  router.post(
+    "/upload-profile-pic",
+    fileUpload.upload.single("profile_pic"),
+    homeController.handleFileUpload
+  );
+
+  // define the upload multi files route
+  // 'multiple_images' is the name of our file input field
+  router.post(
+    "/upload-multiple-images",
+    fileUpload.upload.array("multiple_images", 10), // 10 is the limit for number of uploaded files at once
+    homeController.handleMultiFilesUpload
+  );
 
   app.use("/", router);
 };
