@@ -66,13 +66,7 @@ let getUploadPage = async (req, res) => {
 let handleFileUpload = (req, res) => {
   // req.file contains information of uploaded file
   // req.body contains information of text fields, if there were any
-  console.log("file name upload", req.file, req.body);
-
-  if (req.fileValidationError) {
-    return res.send(req.fileValidationError);
-  } else if (!req.file) {
-    return res.send("Please select an image to upload");
-  }
+  console.log("file upload", req.file);
 
   // Display uploaded image for user validation
   res.send(
@@ -85,12 +79,6 @@ let handleMultiFilesUpload = (req, res) => {
   // req.body contains information of text fields, if there were any
   const files = req.files;
   console.log("files upload ", files, files.length);
-
-  if (req.fileValidationError) {
-    return res.send(req.fileValidationError);
-  } else if (!req.files || !req.files.length) {
-    return res.send("Please select at least one image to upload");
-  }
 
   let index, len;
   let result = `You have uploaded these images (${files.length}): <hr />`;
