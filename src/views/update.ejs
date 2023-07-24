@@ -11,7 +11,12 @@
     <%- include('topnav') -%>
     <div class="w3-container">
       <h2 class="w3-center">Update User information</h2>
-      <form class="w3-container" action="/user/update" method="post">
+      <form
+        class="w3-container"
+        action="/user/update"
+        method="post"
+        enctype="multipart/form-data"
+      >
         <input
           hidden
           type="text"
@@ -59,8 +64,41 @@
             value="<%= dataUser.address %>"
           />
         </p>
+        <div class="w3-row">
+          <div style="width: 105px">
+            <label for="avatar">Avatar</label>
+          </div>
+          <div>
+            <img
+              id="avatar"
+              name="avatar"
+              alt="<%= dataUser.firstName + ' ' + dataUser.lastName %>"
+              title="<%= dataUser.firstName + ' ' + dataUser.lastName %>"
+              src="<%= dataUser.avatar || '/image/default_avatar.jpeg' %>"
+              width="85px"
+            />
+            <br />
+            <input
+              type="file"
+              name="profile_pic"
+              accept="image/png, image/jpeg"
+            />
+          </div>
+        </div>
         <div class="w3-bar">
-          <input type="submit" value="Save" class="w3-button w3-black" />
+          <input
+            type="button"
+            name="cancel"
+            value="Cancel"
+            onClick="window.location.href='/';"
+            class="w3-button w3-black btn-save"
+          />
+
+          <input
+            type="submit"
+            value="Save"
+            class="w3-button w3-green btn-save"
+          />
         </div>
       </form>
     </div>

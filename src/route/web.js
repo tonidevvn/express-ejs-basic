@@ -28,7 +28,26 @@ const initWebRoute = (app) => {
   router.post("/user/edit/:userId", homeController.editUserDetails);
 
   // define the user update route
-  router.post("/user/update", homeController.updateUser);
+  router.post(
+    "/user/update",
+    (req, res, next) => {
+      let upload = fileUpload.upload.single("profile_pic");
+
+      upload(req, res, function (err) {
+        if (req.fileValidationError) {
+          return res.send(req.fileValidationError);
+        } else if (!req.file) {
+          // get default avatar // do nothing
+        } else if (err instanceof multer.MulterError) {
+          return res.send(`ERROR >>> ${err.message} [${err.code}]`);
+        } else if (err) {
+          return res.send(err);
+        }
+        next();
+      });
+    },
+    homeController.updateUser
+  );
 
   // define the upload file route
   router.get("/upload", homeController.getUploadPage);
@@ -77,6 +96,10 @@ const initWebRoute = (app) => {
     },
     homeController.handleMultiFilesUpload
   );
+
+  router.use(function (req, res, next) {
+    res.status(200).render("404.ejs");
+  });
 
   app.use("/", router);
 };

@@ -3,9 +3,13 @@ import "dotenv/config";
 import configViewEngine from "./configs/viewEngine";
 import initWebRoute from "./route/web";
 import initAPIRoute from "./route/api";
+var morgan = require("morgan");
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// log all request in the Apache combined format to STDOUT
+app.use(morgan("tiny"));
 
 // support parsing of application/json type post data
 app.use(express.urlencoded({ extended: true }));

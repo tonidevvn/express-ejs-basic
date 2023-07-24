@@ -50,12 +50,27 @@ let editUserDetails = async (req, res) => {
 
 let updateUser = async (req, res) => {
   let { userId, firstName, lastName, email, address } = req.body;
-  await connectionPool
-    .promise()
-    .execute(
-      `UPDATE users SET firstName=?, lastName=?, email=?, address=? WHERE id=?`,
-      [firstName, lastName, email, address, userId]
-    );
+
+  // req.file contains information of uploaded file
+  if (req.file) {
+    let avatar = `/static/${req.file.filename}`;
+    console.log("file upload", avatar);
+
+    await connectionPool
+      .promise()
+      .execute(
+        `UPDATE users SET firstName=?, lastName=?, email=?, address=?, avatar=? WHERE id=?`,
+        [firstName, lastName, email, address, avatar, userId]
+      );
+  } else {
+    await connectionPool
+      .promise()
+      .execute(
+        `UPDATE users SET firstName=?, lastName=?, email=?, address=? WHERE id=?`,
+        [firstName, lastName, email, address, userId]
+      );
+  }
+
   return res.redirect("/");
 };
 

@@ -53,7 +53,7 @@
           />
         </p>
         <p>
-          <label for="dataUser">Address</label>
+          <label for="address">Address</label>
           <input
             class="w3-input"
             type="text"
@@ -63,8 +63,27 @@
             readonly
           />
         </p>
+        <div class="w3-row">
+          <div style="width: 105px">
+            <label for="avatar">Avatar</label>
+          </div>
+          <div>
+            <img
+              id="avatar"
+              name="avatar"
+              alt="<%= dataUser.firstName + ' ' + dataUser.lastName %>"
+              title="<%= dataUser.firstName + ' ' + dataUser.lastName %>"
+              src="<%= dataUser.avatar || '/image/default_avatar.jpeg' %>"
+              width="85px"
+            />
+          </div>
+        </div>
         <div class="w3-bar">
-          <input type="submit" value="Back" class="w3-button w3-black" />
+          <input
+            type="submit"
+            value="Back"
+            class="w3-button w3-black btn-save"
+          />
         </div>
       </form>
     </div>
