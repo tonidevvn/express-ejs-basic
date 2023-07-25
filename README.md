@@ -1,5 +1,7 @@
 # express-ejs-basic
 
+## This project demontrates how to use ExpressJS with view engine EJS
+
 <h3>Backend</h3>
 <p align=”center”>
 <img width="88" height="28" alt="NodeJs" src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" />
@@ -15,9 +17,7 @@
 
 📛 https://www.npmjs.com/package/ejs 📛
 
-##  Hi There 👋
-## This project demontrates how to use ExpressJS with view engine EJS
-## Some features of source code are as follows 
+## Some features of source code are as follows 👋
 
 - Show list/edit/create/delete user(s)
 - Upload single/multi files (images only) using multer
