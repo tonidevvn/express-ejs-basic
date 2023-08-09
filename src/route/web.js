@@ -98,7 +98,11 @@ const initWebRoute = (app) => {
   );
 
   router.use(function (req, res, next) {
-    res.status(200).render("404.ejs");
+    if (!req.originalUrl.includes("/api/v1/")) {
+      res.status(200).render("404.ejs");
+    } else {
+      next();
+    }
   });
 
   app.use("/", router);
